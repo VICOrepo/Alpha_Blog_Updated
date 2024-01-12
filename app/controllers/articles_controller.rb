@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
 
     def create
       @article = Article.new(article_params)
+      @article.user = User.first
       # redirect_to @article
        if @article.save
       flash[:notice] = "Article was created successfully."
@@ -38,7 +39,7 @@ class ArticlesController < ApplicationController
         redirect_to @article
         else
             redirect_to edit_article_path, alert: @article.errors.full_messages.join(', ')
-         end
+        end
     end
 
     def destroy
